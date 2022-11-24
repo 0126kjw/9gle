@@ -5,6 +5,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors(); //CORS 해제
+
   // Swaggwer 적용
   const config = new DocumentBuilder()
     .setTitle('9gle')
