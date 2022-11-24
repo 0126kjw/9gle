@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 const fs = require('fs');
 const name = [
@@ -31,28 +31,28 @@ const name = [
 
 @Injectable()
 export class MapService {
-  findMap(id: string): object {
+  async findMap(id: string): Promise<object> {
     for (let i in name) {
       const jsonFile = fs.readFileSync(`src/map/data/${name[i]}.json`, 'utf8');
       const jsonData = JSON.parse(jsonFile);
       if (id === jsonData._id) {
         console.log(`Response: ${jsonData.name}`);
-        return jsonData;
+        return await jsonData;
       }
     }
-    return { error: 'id 값이 존재하지 않습니다.' };
+    throw new NotFoundException('id 값이 존재하지 않습니다.');
   }
 
-  findPlace(id: string): object {
+  async findPlace(id: string): Promise<object> {
     const jsonFile = fs.readFileSync(`src/map/data/mapPin.json`, 'utf8');
     const jsonData = JSON.parse(jsonFile);
     for (let i in name) {
       const data = jsonData.Map[i];
       if (id === data._id) {
         console.log(`Response: ${data.name} List`);
-        return data;
+        return await data;
       }
     }
-    return { error: 'id 값이 존재하지 않습니다.' };
+    throw new NotFoundException('id 값이 존재하지 않습니다.');
   }
 }

@@ -6,14 +6,18 @@ export class MapController {
   constructor(private mapService: MapService) {}
 
   @Get('/:guid')
-  async getMapInfo(@Param('guid') id: string, @Res() res): Promise<object> {
+  async getMapInfo(@Param('guid') id: string, @Res() res): Promise<void> {
     const mapData = this.mapService.findMap(id);
-    return await res.status(200).json(mapData);
+    await mapData.then((data) => {
+      return res.status(200).json(data);
+    });
   }
 
   @Get('/:guid/pins')
-  async getPin(@Param('guid') id: string, @Res() res): Promise<object> {
+  async getPin(@Param('guid') id: string, @Res() res): Promise<void> {
     const pinData = this.mapService.findPlace(id);
-    return await res.status(200).json(pinData);
+    await pinData.then((data) => {
+      return res.status(200).json(data);
+    });
   }
 }
