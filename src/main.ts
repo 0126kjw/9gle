@@ -12,7 +12,7 @@ async function bootstrap() {
     .setTitle('9gle')
     .setDescription('9gle API description')
     .setVersion('1.0')
-    // .addTag('nestjs')
+    .addTag('Map')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
