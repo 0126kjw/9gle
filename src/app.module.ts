@@ -3,9 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MapModule } from './map/map.module';
 import { ConfigurationModule } from './configuration/configuration.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [ConfigurationModule, MapModule],
+  imports: [
+    MongooseModule.forRoot(process.env.MONGO_URL),
+    ConfigurationModule,
+    MapModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
