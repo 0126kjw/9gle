@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ExhibitionModule } from './exhibitions/exhibitions.module';
-import { MuseumModule } from './museums/museums.module';
-import { MapModule } from './map/map.module';
-import { SearchModule } from './search/search.module';
+import { ExhibitionModule } from './modules/exhibitions/exhibitions.module';
+import { MuseumModule } from './modules/museums/museums.module';
+import { MapModule } from './modules/map/map.module';
+import { SearchModule } from './modules/search/search.module';
 
 @Module({
   imports: [

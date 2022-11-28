@@ -21,7 +21,7 @@ export class MuseumService {
   }
 
   async pagination(page: number) {
-    const perPage = 18;
+    const perPage = 9;
     // const total = await this.museumModel.countDocuments({});
     // console.log(total);
     const museums = await this.museumModel

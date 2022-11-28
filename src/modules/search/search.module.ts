@@ -3,8 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import {
   Exhibition,
   ExhibitionSchema,
-} from 'src/exhibitions/schemas/exhibition.schema';
-import { Museum, MuseumSchema } from 'src/museums/schemas/museum.schema';
+} from '../exhibitions/schemas/exhibition.schema';
+import { Museum, MuseumSchema } from '../museums/schemas/museum.schema';
 import { SearchController } from './search.controller';
 import { SearchService } from './search.service';
 

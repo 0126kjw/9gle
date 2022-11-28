@@ -24,7 +24,7 @@ export class ExhibitionService {
   }
 
   async pagination(page: number) {
-    const perPage = 18;
+    const perPage = 9;
     // const total = await this.exhibitionModel.countDocuments({});
     const exhibitions = await this.exhibitionModel
       .find({})

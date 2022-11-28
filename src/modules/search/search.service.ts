@@ -5,8 +5,8 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Exhibition } from 'src/exhibitions/schemas/exhibition.schema';
-import { Museum } from 'src/museums/schemas/museum.schema';
+import { Exhibition } from '../exhibitions/schemas/exhibition.schema';
+import { Museum } from '../museums/schemas/museum.schema';
 
 @Injectable()
 export class SearchService {
