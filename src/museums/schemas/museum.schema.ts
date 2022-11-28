@@ -7,7 +7,7 @@ export type MuseumDocument = Museum & Document;
 @Schema()
 export class Museum {
   @Prop()
-  namemuseums: string;
+  facility_name: string;
 
   @Prop()
   division: string;
@@ -68,3 +68,4 @@ export class Museum {
 }
 
 export const MuseumSchema = SchemaFactory.createForClass(Museum);
+MuseumSchema.index({ facility_name: 'text' });

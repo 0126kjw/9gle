@@ -22,3 +22,4 @@ export class Exhibition {
 }
 
 export const ExhibitionSchema = SchemaFactory.createForClass(Exhibition);
+ExhibitionSchema.index({ title: 'text', place: 'text' });
