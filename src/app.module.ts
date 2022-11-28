@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ExhibitionModule } from './exhibitions/exhibitions.module';
 import { MuseumModule } from './museums/museums.module';
 import { MapModule } from './map/map.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { MapModule } from './map/map.module';
     MuseumModule,
     ExhibitionModule,
     MapModule,
+    SearchModule,
   ],
   controllers: [],
   providers: [],
