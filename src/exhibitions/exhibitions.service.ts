@@ -23,6 +23,18 @@ export class ExhibitionService {
     return exhibition;
   }
 
+  async pagination(page: number) {
+    const perPage = 18;
+    // const total = await this.exhibitionModel.countDocuments({});
+    const exhibitions = await this.exhibitionModel
+      .find({})
+      // .sort({ createdAt: 1 })
+      .skip(perPage * (page - 1))
+      .limit(perPage);
+
+    return exhibitions;
+  }
+
   @Cron('59 59 23 * * *')
   async handleCron() {
     const list = await exhibitionList();

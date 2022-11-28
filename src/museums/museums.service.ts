@@ -19,4 +19,16 @@ export class MuseumService {
     const museum = await this.museumModel.findOne({ id });
     return museum;
   }
+
+  async pagination(page: number) {
+    const perPage = 18;
+    // const total = await this.museumModel.countDocuments({});
+    // console.log(total);
+    const museums = await this.museumModel
+      .find({})
+      .skip(perPage * (page - 1))
+      .limit(perPage);
+
+    return museums;
+  }
 }
