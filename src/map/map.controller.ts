@@ -25,7 +25,7 @@ export class MapController {
     return mapData;
   }
 
-  @ApiOperation({ summary: '자치구 별 모든 장소 조회' })
+  @ApiOperation({ summary: '자치구 별 장소 조회' })
   @ApiOkResponse({
     description: 'guid 값과 동일한 자치구의 장소 데이터를 반환한다.',
   })
