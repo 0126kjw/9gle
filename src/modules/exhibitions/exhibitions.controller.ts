@@ -23,7 +23,7 @@ export class ExhibitionController {
     return exhibition;
   }
 
-  @ApiOperation({ summary: '전시회 목록 18개씩' })
+  @ApiOperation({ summary: '전시회 목록 9개씩' })
   @ApiQuery({ name: 'page', example: 1 })
   @Get()
   async listExhibition(@Query('page') page: number) {

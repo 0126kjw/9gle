@@ -23,7 +23,7 @@ export class MuseumController {
     return museum;
   }
 
-  @ApiOperation({ summary: '박물관/전시관 목록 18개씩' })
+  @ApiOperation({ summary: '박물관/전시관 목록 9개씩' })
   @ApiQuery({ name: 'page', example: 1 })
   @Get()
   async listMuseum(@Query('page') page: number) {
