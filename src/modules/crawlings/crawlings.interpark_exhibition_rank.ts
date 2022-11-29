@@ -46,8 +46,7 @@ export const exhibitionList = async () => {
 
     const b1 = text.indexOf('GroupCode');
     const b2 = text.indexOf('title');
-    tempObj.href =
-      'https://tickets.interpark.com/goods/' + text.slice(b1 + 10, b2 - 2);
+    tempObj.href = text.slice(b1 + 10, b2 - 2);
 
     const c1 = text.indexOf('alt');
     const c2 = text.indexOf('onerror');
