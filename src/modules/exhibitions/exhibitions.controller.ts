@@ -1,7 +1,14 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { Exhibition } from './schemas/exhibition.schema';
 import { ExhibitionService } from './exhibitions.service';
-import { ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import {
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
+import { GetExhibitionDto } from './dto/getExhibition.dto';
+import { GetExhibitionPagenationDto } from './dto/getExhibitionPagenation.dto';
 
 @ApiTags('Exhibition')
 @Controller('exhibitions')
@@ -16,18 +23,30 @@ export class ExhibitionController {
   // }
 
   @ApiOperation({ summary: '전시회 상세' })
-  @ApiParam({ name: 'id', example: '638461231109a1abdb7ed797' })
+  @ApiOkResponse({ description: 'id값과 동일한 자치구의 데이터를 반환합니다.' })
+  @ApiNotFoundResponse({ description: 'NotFound' })
   @Get('/:id')
-  async getExhibition(@Param('id') id: string): Promise<Exhibition> {
-    const exhibition = await this.exhibitionService.findById(id);
+  async getExhibition(
+    @Param('id') getExhibitionDto: GetExhibitionDto,
+  ): Promise<Exhibition> {
+    const exhibition = await this.exhibitionService.findById(
+      getExhibitionDto.id,
+    );
     return exhibition;
   }
 
   @ApiOperation({ summary: '전시회 목록 9개씩' })
-  @ApiQuery({ name: 'page', example: 1 })
+  @ApiOkResponse({
+    description: 'page의 값에 위치한 9개의 데이터를 반환합니다.',
+  })
+  @ApiNotFoundResponse({ description: 'NotFound' })
   @Get()
-  async listExhibition(@Query('page') page: number) {
-    const listExhibition = await this.exhibitionService.pagination(page);
+  async listExhibition(
+    @Query('page') getExhibitionPagenationDto: GetExhibitionPagenationDto,
+  ) {
+    const listExhibition = await this.exhibitionService.pagination(
+      getExhibitionPagenationDto.page,
+    );
     return listExhibition;
   }
 }

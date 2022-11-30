@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
+import { Document } from 'mongoose';
 
 export type ExhibitionDocument = Exhibition & Document;
 
@@ -18,8 +18,9 @@ export class Exhibition {
   place: string;
 
   @Prop()
-  period: String[];
+  period: string;
 }
 
 export const ExhibitionSchema = SchemaFactory.createForClass(Exhibition);
+// ExhibitionSchema.index({ createdAt: 1 }, { expireAfterSeconds: 86400 }); // 24시간이후 자동 삭제
 ExhibitionSchema.index({ title: 'text', place: 'text' });

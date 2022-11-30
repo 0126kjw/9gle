@@ -4,6 +4,7 @@ import { ExhibitionService } from './exhibitions.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Exhibition, ExhibitionSchema } from './schemas/exhibition.schema';
 import { ScheduleModule } from '@nestjs/schedule';
+import { ExhibitionScheduler } from './scheduler/exhibitions.scheduler';
 
 @Module({
   imports: [
@@ -13,6 +14,6 @@ import { ScheduleModule } from '@nestjs/schedule';
     ]),
   ],
   controllers: [ExhibitionController],
-  providers: [ExhibitionService],
+  providers: [ExhibitionService, ExhibitionScheduler],
 })
 export class ExhibitionModule {}
