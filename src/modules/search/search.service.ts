@@ -17,30 +17,39 @@ export class SearchService {
   ) {}
 
   async search(option: string, keyword: string): Promise<object> {
-    let options = [];
-
-    if (option === 'museum') {
-      const museumResults = await this.museumModel.find({
-        facility_name: new RegExp(keyword),
-      });
-      if (museumResults.length === 0) {
-        throw new NotFoundException('검색결과가 존재하지 않습니다.');
-      }
-      return museumResults;
-    } else if (option === 'exhibition') {
-      options = [
-        { title: new RegExp(keyword) },
-        { place: new RegExp(keyword) },
-      ];
-      const exhibitionResults = await this.exhibitionModel.find({
-        $or: options,
-      });
-      if (exhibitionResults.length === 0) {
-        throw new NotFoundException('검색결과가 존재하지 않습니다.');
-      }
-      return exhibitionResults;
-    } else {
-      throw new BadRequestException();
+    switch (option) {
+      case 'museum':
+        return await this.searchMuseum(keyword);
+      case 'exhibition':
+        return await this.searchExhibition(keyword);
+      default:
+        throw new BadRequestException();
     }
+  }
+
+  async searchMuseum(keyword: string) {
+    const museumResults = await this.museumModel.find({
+      name: new RegExp(keyword),
+    });
+
+    if (museumResults.length === 0) {
+      throw new NotFoundException('검색결과가 존재하지 않습니다.');
+    }
+    return museumResults;
+  }
+
+  async searchExhibition(keyword: string) {
+    const options = [
+      { title: new RegExp(keyword) },
+      { place: new RegExp(keyword) },
+    ];
+    const exhibitionResults = await this.exhibitionModel.find({
+      $or: options,
+    });
+
+    if (exhibitionResults.length === 0) {
+      throw new NotFoundException('검색결과가 존재하지 않습니다.');
+    }
+    return exhibitionResults;
   }
 }

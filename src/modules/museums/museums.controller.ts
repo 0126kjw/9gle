@@ -1,7 +1,14 @@
-import { Controller, Get, Param, Post, Body, Put, Query } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Param, Query } from '@nestjs/common';
+import {
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Museum } from './schemas/museum.schema';
 import { MuseumService } from './museums.service';
+import { GetMuseumDto } from './dto/getMuseum.dto';
+import { GetMuseumPagenationDto } from './dto/getMuseumPagenation.dto';
 
 @ApiTags('Museum')
 @Controller('museums')
@@ -16,18 +23,27 @@ export class MuseumController {
   // }
 
   @ApiOperation({ summary: '박물관/전시관 상세' })
-  @ApiParam({ name: 'id', example: '6384520144788f15a6cd386b' })
+  @ApiOkResponse({
+    description: 'id값과 동일한 박물관/전시관의 상세 데이터를 반환합니다.',
+  })
+  @ApiNotFoundResponse({ description: 'NotFound' })
   @Get('/:id')
-  async getMuseum(@Param('id') id: string): Promise<Museum> {
-    const museum = await this.museumService.findById(id);
+  async getMuseum(@Param() getMuseumDto: GetMuseumDto): Promise<Museum> {
+    const museum = await this.museumService.findById(getMuseumDto.id);
     return museum;
   }
 
   @ApiOperation({ summary: '박물관/전시관 목록 9개씩' })
-  @ApiQuery({ name: 'page', example: 1 })
+  @ApiOkResponse({
+    description:
+      'page의 값에 위치한 박물관/전시관 목록 9개의 데이터를 반환합니다.',
+  })
+  @ApiNotFoundResponse({ description: 'NotFound' })
   @Get()
-  async listMuseum(@Query('page') page: number) {
-    const listMuseum = await this.museumService.pagination(page);
+  async listMuseum(@Query() getMuseumPagenationDto: GetMuseumPagenationDto) {
+    const listMuseum = await this.museumService.pagination(
+      getMuseumPagenationDto.page,
+    );
     return listMuseum;
   }
 }

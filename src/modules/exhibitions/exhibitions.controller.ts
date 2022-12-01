@@ -23,11 +23,13 @@ export class ExhibitionController {
   // }
 
   @ApiOperation({ summary: '전시회 상세' })
-  @ApiOkResponse({ description: 'id값과 동일한 자치구의 데이터를 반환합니다.' })
+  @ApiOkResponse({
+    description: 'id값과 동일한 전시회의 상세 데이터를 반환합니다.',
+  })
   @ApiNotFoundResponse({ description: 'NotFound' })
   @Get('/:id')
   async getExhibition(
-    @Param('id') getExhibitionDto: GetExhibitionDto,
+    @Param() getExhibitionDto: GetExhibitionDto,
   ): Promise<Exhibition> {
     const exhibition = await this.exhibitionService.findById(
       getExhibitionDto.id,
@@ -37,7 +39,7 @@ export class ExhibitionController {
 
   @ApiOperation({ summary: '전시회 목록 9개씩' })
   @ApiOkResponse({
-    description: 'page의 값에 위치한 9개의 데이터를 반환합니다.',
+    description: 'page의 값에 위치한 전시회 목록 9개개의 데이터를 반환합니다.',
   })
   @ApiNotFoundResponse({ description: 'NotFound' })
   @Get()

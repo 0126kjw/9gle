@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
+import { Document } from 'mongoose';
 
 export type MuseumDocument = Museum & Document;
 
@@ -7,16 +7,19 @@ export type MuseumDocument = Museum & Document;
 @Schema()
 export class Museum {
   @Prop()
-  facility_name: string;
+  name: string;
 
   @Prop()
-  division: string;
+  runby: string;
 
   @Prop()
-  raod_address: string;
+  category: string;
 
   @Prop()
-  land_address: string;
+  newAddress: string;
+
+  @Prop()
+  oldAddress: string;
 
   @Prop()
   latitude: number;
@@ -25,40 +28,67 @@ export class Museum {
   longitude: number;
 
   @Prop()
-  office_phone: string;
+  contactInfo: string;
 
   @Prop()
-  office_name: string;
+  institution: string;
 
   @Prop()
-  office_site: string;
+  website: string;
 
   @Prop()
-  weekday_start: string;
+  facilities: string;
 
   @Prop()
-  weekday_end: string;
+  mon: string;
 
   @Prop()
-  holiday_start: string;
+  tue: string;
 
   @Prop()
-  holiday_end: string;
+  wed: string;
 
   @Prop()
-  closure: string;
+  thu: string;
 
   @Prop()
-  adult_admission_fee: string;
+  fri: string;
 
   @Prop()
-  youth_admission_fee: string;
+  sat: string;
 
   @Prop()
-  child_admission_fee: string;
+  sun: string;
 
   @Prop()
-  etc_admission_fee_info: string;
+  offday: string;
+
+  @Prop()
+  isFree: boolean;
+
+  @Prop()
+  adultFee: string;
+
+  @Prop()
+  youthFee: string;
+
+  @Prop()
+  childFee: string;
+
+  @Prop()
+  feeUrl: string;
+
+  @Prop()
+  description: string;
+
+  @Prop()
+  srcName: string;
+
+  @Prop()
+  srcUrl: string;
+
+  @Prop()
+  imgSrcUrl: string;
 
   // @Prop()
   // createdAt: string;
@@ -68,4 +98,4 @@ export class Museum {
 }
 
 export const MuseumSchema = SchemaFactory.createForClass(Museum);
-MuseumSchema.index({ facility_name: 'text' });
+MuseumSchema.index({ name: 'text' });
