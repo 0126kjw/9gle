@@ -42,7 +42,7 @@ export class ExhibitionController {
   @ApiNotFoundResponse({ description: 'NotFound' })
   @Get()
   async listExhibition(
-    @Query('page') getExhibitionPagenationDto: GetExhibitionPagenationDto,
+    @Query() getExhibitionPagenationDto: GetExhibitionPagenationDto,
   ) {
     const listExhibition = await this.exhibitionService.pagination(
       getExhibitionPagenationDto.page,
