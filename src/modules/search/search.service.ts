@@ -32,9 +32,6 @@ export class SearchService {
       name: new RegExp(keyword),
     });
 
-    if (museumResults.length === 0) {
-      throw new NotFoundException('검색결과가 존재하지 않습니다.');
-    }
     return museumResults;
   }
 
@@ -47,9 +44,6 @@ export class SearchService {
       $or: options,
     });
 
-    if (exhibitionResults.length === 0) {
-      throw new NotFoundException('검색결과가 존재하지 않습니다.');
-    }
     return exhibitionResults;
   }
 }
