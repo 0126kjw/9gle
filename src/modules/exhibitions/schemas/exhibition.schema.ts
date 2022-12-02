@@ -18,7 +18,7 @@ export class Exhibition {
   place: string;
 
   @Prop()
-  period: string;
+  period: string[];
 }
 
 export const ExhibitionSchema = SchemaFactory.createForClass(Exhibition);

@@ -37,7 +37,7 @@ export const crawlExhibitions = async () => {
       imgSrc: '',
       href: '',
       place: '',
-      period: '',
+      period: [],
     };
 
     const startOfImgAlt = text.indexOf('alt');
@@ -57,10 +57,14 @@ export const crawlExhibitions = async () => {
     tempObj.place = text.slice(startOfPlace + 14, endOfPlace);
 
     const period = text.indexOf('~<br>');
-    tempObj.period = `${text.slice(period - 10, period)} ~ ${text.slice(
-      period + 13,
-      period + 23,
-    )}`;
+    const regexForDot = /\./gi;
+    const a = new Date(
+      text.slice(period - 10, period).replace(regexForDot, '-'),
+    );
+    const b = new Date(
+      text.slice(period + 13, period + 23).replace(regexForDot, '-'),
+    );
+    tempObj.period = [a, b];
 
     exhibitionList.push(tempObj);
   });
