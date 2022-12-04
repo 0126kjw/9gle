@@ -5,6 +5,7 @@ import { ExhibitionModule } from './modules/exhibitions/exhibitions.module';
 import { MuseumModule } from './modules/museums/museums.module';
 import { MapModule } from './modules/map/map.module';
 import { SearchModule } from './modules/search/search.module';
+import { ImageModule } from './modules/image/image.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { SearchModule } from './modules/search/search.module';
     ExhibitionModule,
     MapModule,
     SearchModule,
+    ImageModule,
   ],
   controllers: [],
   providers: [],
