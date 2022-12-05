@@ -10,5 +10,6 @@ import { MongooseModule } from '@nestjs/mongoose';
   ],
   controllers: [MuseumController],
   providers: [MuseumService],
+  exports: [MuseumService],
 })
 export class MuseumModule {}

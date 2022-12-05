@@ -1,20 +1,11 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import {
-  Exhibition,
-  ExhibitionSchema,
-} from '../exhibitions/schemas/exhibition.schema';
-import { Museum, MuseumSchema } from '../museums/schemas/museum.schema';
+import { ExhibitionModule } from '../exhibitions/exhibitions.module';
+import { MuseumModule } from '../museums/museums.module';
 import { SearchController } from './search.controller';
 import { SearchService } from './search.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: Museum.name, schema: MuseumSchema }]),
-    MongooseModule.forFeature([
-      { name: Exhibition.name, schema: ExhibitionSchema },
-    ]),
-  ],
+  imports: [MuseumModule, ExhibitionModule],
   controllers: [SearchController],
   providers: [SearchService],
 })

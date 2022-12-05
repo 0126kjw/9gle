@@ -15,5 +15,6 @@ import { ExhibitionScheduler } from './scheduler/exhibitions.scheduler';
   ],
   controllers: [ExhibitionController],
   providers: [ExhibitionService, ExhibitionScheduler],
+  exports: [ExhibitionService],
 })
 export class ExhibitionModule {}

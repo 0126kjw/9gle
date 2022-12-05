@@ -31,4 +31,16 @@ export class ExhibitionService {
 
     return exhibitions;
   }
+
+  async searchExhibition(keyword: string) {
+    const options = [
+      { title: new RegExp(keyword) },
+      { place: new RegExp(keyword) },
+    ];
+    const exhibitionResults = await this.exhibitionModel.find({
+      $or: options,
+    });
+
+    return exhibitionResults;
+  }
 }

@@ -31,4 +31,12 @@ export class MuseumService {
 
     return museums;
   }
+
+  async searchMuseum(keyword: string) {
+    const museumResults = await this.museumModel.find({
+      name: new RegExp(keyword),
+    });
+
+    return museumResults;
+  }
 }
