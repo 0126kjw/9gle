@@ -7,6 +7,12 @@ export type MuseumDocument = Museum & Document;
 @Schema()
 export class Museum {
   @Prop()
+  _id: string;
+
+  @Prop()
+  id: number;
+
+  @Prop()
   name: string;
 
   @Prop()
@@ -82,13 +88,7 @@ export class Museum {
   description: string;
 
   @Prop()
-  srcName: string;
-
-  @Prop()
-  srcUrl: string;
-
-  @Prop()
-  imgSrcUrl: string;
+  srcName: string[];
 
   // @Prop()
   // createdAt: string;

@@ -20,6 +20,11 @@ export class ExhibitionService {
     return exhibition;
   }
 
+  async findRightItems(name: string, reponseInfo: string): Promise<Exhibition> {
+    // 아직 날짜 관련하여 설정하지 않았음.
+    return await this.exhibitionModel.findOne({ name }, reponseInfo);
+  }
+
   async pagination(page: number) {
     const perPage = 9;
     // const total = await this.exhibitionModel.countDocuments({});

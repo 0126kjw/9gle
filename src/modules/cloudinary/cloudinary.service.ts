@@ -16,7 +16,7 @@ export class CloudinaryService {
   }
 
   async findAllImage() {
-    return await v2.api.resource('').then((result) => {
+    return await v2.api.resources().then((result) => {
       console.log(result);
       return result;
     });
