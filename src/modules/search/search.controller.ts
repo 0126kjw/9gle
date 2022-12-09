@@ -1,6 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { searchDTO } from './dto/search.dto';
+import { searchTitleDTO } from './dto/searchTitle.dto';
 import { SearchService } from './search.service';
 
 @ApiTags('Search')
@@ -14,6 +15,14 @@ export class SearchController {
     const searchData = await this.searchService.search(
       searchDto.option,
       searchDto.keyword,
+    );
+    return searchData;
+  }
+
+  @Get('/recommend')
+  async searchTitle(@Query() searchTitleDto: searchTitleDTO): Promise<object> {
+    const searchData = await this.searchService.searchTitle(
+      searchTitleDto.keyword,
     );
     return searchData;
   }

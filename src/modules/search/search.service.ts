@@ -19,4 +19,13 @@ export class SearchService {
         throw new BadRequestException();
     }
   }
+
+  async searchTitle(keyword: string): Promise<object> {
+    const museumTitleList = [];
+    const musuems = await this.museumService.searchMuseum(keyword);
+    for (let i = 0; i < musuems.length; i++) {
+      museumTitleList.push(musuems[i].name);
+    }
+    return museumTitleList;
+  }
 }
