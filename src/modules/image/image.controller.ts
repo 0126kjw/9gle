@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Param,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -34,5 +35,10 @@ export class ImageController {
   @Get()
   async findAllImage() {
     return await this.imageService.findAllImageToCloudinary();
+  }
+
+  @Get('/:id')
+  async findImage(@Param('id') publicId: string) {
+    return await this.imageService.findImageToCloudinary(publicId);
   }
 }

@@ -7,7 +7,7 @@
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
-data
+
 # Sensitive or high-churn files:
 .idea/**/dataSources/
 .idea/**/dataSources.ids
@@ -396,3 +396,5 @@ Temporary Items
 # Local
 .env
 dist
+mymuse-chatbot-app-0b8100f9938b.json
+data

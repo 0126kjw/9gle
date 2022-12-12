@@ -1,10 +1,12 @@
-import { IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsNumber } from 'class-validator';
 
 export class GetMuseumDto {
   /**
    * id
-   * @example '1'
+   * @example 1
    */
-  @IsString()
+  @IsNumber()
+  @Type(() => Number)
   id: number;
 }

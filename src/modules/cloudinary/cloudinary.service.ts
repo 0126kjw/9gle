@@ -15,8 +15,15 @@ export class CloudinaryService {
     });
   }
 
-  async findAllImage() {
+  async findAllImage(): Promise<object> {
     return await v2.api.resources().then((result) => {
+      console.log(result);
+      return result;
+    });
+  }
+
+  async findImage(publicId: string): Promise<object> {
+    return await v2.api.resource(publicId).then((result) => {
       console.log(result);
       return result;
     });

@@ -1,10 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import {
-  ApiNotFoundResponse,
-  ApiOkResponse,
-  ApiOperation,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { getMapInfo } from './dto/getMapInfo.dto';
 import { getPin } from './dto/getPin.dto';
 import { MapService } from './map.service';
@@ -14,7 +9,9 @@ import { MapService } from './map.service';
 export class MapController {
   constructor(private mapService: MapService) {}
 
-  @ApiOperation({ summary: '자치구 데이터 가져오기' })
+  /**
+   * 자치구 데이터 가져오기
+   */
   @ApiOkResponse({
     description: 'guid 값과 동일한 자치구의 데이터를 반환한다.',
   })
@@ -25,7 +22,9 @@ export class MapController {
     return mapData;
   }
 
-  @ApiOperation({ summary: '자치구 별 장소 조회' })
+  /**
+   * 자치구 별 장소 조회
+   */
   @ApiOkResponse({
     description: 'guid 값과 동일한 자치구의 장소 데이터를 반환한다.',
   })

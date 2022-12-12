@@ -10,49 +10,40 @@ export class MuseumService {
     private readonly museumModel: Model<Museum>,
   ) {}
 
-  async findAll(): Promise<Museum[]> {
-    const museums = await this.museumModel.find();
-    return museums;
-  }
-
   async findById(id: number): Promise<Museum> {
-    const museum = await this.museumModel.findOne({ id });
-    return museum;
+    return this.museumModel.findOne({ id }).lean();
   }
 
-  async findOne(name: string, reponseInfo: string): Promise<Museum> {
-    const test = await this.museumModel.findOne({ name }, reponseInfo).lean();
-    console.log(test);
-    return test;
+  async findOne(facilityName: string, reponseInfo: string): Promise<Museum> {
+    return this.museumModel.findOne({ name: facilityName }, reponseInfo).lean();
   }
 
   async findRightItems(
-    borough: string,
+    address: string,
     category: string,
     reponseInfo: string,
-  ): Promise<Museum> {
-    return await this.museumModel
-      .find({ oldAddress: { $regex: borough }, category }, reponseInfo)
+  ): Promise<Museum | Museum[]> {
+    return this.museumModel
+      .find({ oldAddress: { $regex: address }, category }, reponseInfo)
       .lean();
   }
 
-  async pagination(page: number) {
+  async pagination(page: number): Promise<Museum[]> {
     const perPage = 9;
     // const total = await this.museumModel.countDocuments({});
     // console.log(total);
-    const museums = await this.museumModel
+    return this.museumModel
       .find({})
       .skip(perPage * (page - 1))
-      .limit(perPage);
-
-    return museums;
+      .limit(perPage)
+      .lean();
   }
 
-  async searchMuseum(keyword: string) {
-    const museumResults = await this.museumModel.find({
-      name: new RegExp(keyword),
-    });
-
-    return museumResults;
+  async searchMuseum(keyword: string): Promise<Museum[]> {
+    return this.museumModel
+      .find({
+        name: new RegExp(keyword),
+      })
+      .lean();
   }
 }

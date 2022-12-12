@@ -37,6 +37,7 @@ export const crawlExhibitions = async () => {
       imgSrc: '',
       href: '',
       place: '',
+      website: '',
       period: [],
     };
 

@@ -90,11 +90,11 @@ export class Museum {
   @Prop()
   srcName: string[];
 
-  // @Prop()
-  // createdAt: string;
+  @Prop()
+  createdAt: string;
 
-  // @Prop()
-  // updatedAt: string;
+  @Prop()
+  updatedAt: string;
 }
 
 export const MuseumSchema = SchemaFactory.createForClass(Museum);

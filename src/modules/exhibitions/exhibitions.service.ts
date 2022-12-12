@@ -10,42 +10,54 @@ export class ExhibitionService {
     private readonly exhibitionModel: Model<Exhibition>,
   ) {}
 
-  // async findAll(): Promise<Exhibition[]> {
-  //   const exhibitions = await this.exhibitionModel.find();
-  //   return exhibitions;
-  // }
-
   async findById(id: string): Promise<Exhibition> {
-    const exhibition = await this.exhibitionModel.findOne({ id });
-    return exhibition;
+    return this.exhibitionModel.findOne({ id }).lean();
   }
 
-  async findRightItems(name: string, reponseInfo: string): Promise<Exhibition> {
-    // 아직 날짜 관련하여 설정하지 않았음.
-    return await this.exhibitionModel.findOne({ name }, reponseInfo);
+  async findRightItems(endDate: Date, reponseInfo: string): Promise<any> {
+    const exhibitions = await this.exhibitionModel
+      .find(
+        {
+          'period.0': {
+            $lte: endDate,
+          },
+          'period.1': {
+            $gte: endDate,
+          },
+        },
+        reponseInfo,
+      )
+      .lean();
+
+    return exhibitions.map(({ title, href }) => ({
+      title,
+      website: `https://tickets.interpark.com/goods/${href}`,
+    }));
   }
 
-  async pagination(page: number) {
+  async pagination(page: number): Promise<Exhibition[]> {
     const perPage = 9;
     // const total = await this.exhibitionModel.countDocuments({});
-    const exhibitions = await this.exhibitionModel
-      .find({})
-      // .sort({ createdAt: 1 })
-      .skip(perPage * (page - 1))
-      .limit(perPage);
-
-    return exhibitions;
+    return (
+      this.exhibitionModel
+        .find()
+        // .sort({ createdAt: 1 })
+        .skip(perPage * (page - 1))
+        .limit(perPage)
+        .lean()
+    );
   }
 
-  async searchExhibition(keyword: string) {
+  async searchExhibition(keyword: string): Promise<Exhibition[]> {
     const options = [
       { title: new RegExp(keyword) },
       { place: new RegExp(keyword) },
     ];
-    const exhibitionResults = await this.exhibitionModel.find({
-      $or: options,
-    });
 
-    return exhibitionResults;
+    return this.exhibitionModel
+      .find({
+        $or: options,
+      })
+      .lean();
   }
 }

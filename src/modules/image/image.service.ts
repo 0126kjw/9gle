@@ -14,4 +14,8 @@ export class ImageService {
   async findAllImageToCloudinary() {
     return await this.cloudinary.findAllImage();
   }
+
+  async findImageToCloudinary(publicId: string) {
+    return await this.cloudinary.findImage(publicId);
+  }
 }

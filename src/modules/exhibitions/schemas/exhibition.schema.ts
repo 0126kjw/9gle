@@ -19,8 +19,14 @@ export class Exhibition {
 
   @Prop()
   period: string[];
+
+  @Prop()
+  createdAt: string;
+
+  @Prop()
+  updatedAt: string;
 }
 
 export const ExhibitionSchema = SchemaFactory.createForClass(Exhibition);
-// ExhibitionSchema.index({ createdAt: 1 }, { expireAfterSeconds: 86400 }); // 24시간이후 자동 삭제
+ExhibitionSchema.index({ createdAt: 1 }, { expireAfterSeconds: 86400 }); // 24시간이후 자동 삭제
 ExhibitionSchema.index({ title: 'text', place: 'text' });
