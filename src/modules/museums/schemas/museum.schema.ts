@@ -3,7 +3,6 @@ import { Document } from 'mongoose';
 
 export type MuseumDocument = Museum & Document;
 
-// @Schema({ timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } })
 @Schema()
 export class Museum {
   @Prop()
@@ -91,10 +90,10 @@ export class Museum {
   srcName: string[];
 
   @Prop()
-  createdAt: string;
+  createdAt: Date;
 
   @Prop()
-  updatedAt: string;
+  updatedAt: Date;
 }
 
 export const MuseumSchema = SchemaFactory.createForClass(Museum);

@@ -30,10 +30,8 @@ export class MuseumService {
 
   async pagination(page: number): Promise<Museum[]> {
     const perPage = 9;
-    // const total = await this.museumModel.countDocuments({});
-    // console.log(total);
     return this.museumModel
-      .find({})
+      .find()
       .skip(perPage * (page - 1))
       .limit(perPage)
       .lean();
