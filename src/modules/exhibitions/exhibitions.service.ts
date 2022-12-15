@@ -15,7 +15,7 @@ export class ExhibitionService {
   }
 
   async findRightItems(endDate: Date, reponseInfo: string): Promise<any> {
-    const exhibitions = await this.exhibitionModel
+    return this.exhibitionModel
       .find(
         {
           'period.0': {
@@ -28,24 +28,15 @@ export class ExhibitionService {
         reponseInfo,
       )
       .lean();
-
-    return exhibitions.map(({ title, href }) => ({
-      title,
-      website: `https://tickets.interpark.com/goods/${href}`,
-    }));
   }
 
   async pagination(page: number): Promise<Exhibition[]> {
     const perPage = 9;
-    // const total = await this.exhibitionModel.countDocuments({});
-    return (
-      this.exhibitionModel
-        .find()
-        // .sort({ createdAt: 1 })
-        .skip(perPage * (page - 1))
-        .limit(perPage)
-        .lean()
-    );
+    return this.exhibitionModel
+      .find()
+      .skip(perPage * (page - 1))
+      .limit(perPage)
+      .lean();
   }
 
   async searchExhibition(keyword: string): Promise<Exhibition[]> {
@@ -54,10 +45,6 @@ export class ExhibitionService {
       { place: new RegExp(keyword) },
     ];
 
-    return this.exhibitionModel
-      .find({
-        $or: options,
-      })
-      .lean();
+    return this.exhibitionModel.find({ $or: options }).lean();
   }
 }

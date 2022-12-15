@@ -21,10 +21,10 @@ export class Exhibition {
   period: string[];
 
   @Prop()
-  createdAt: string;
+  createdAt: Date;
 
   @Prop()
-  updatedAt: string;
+  updatedAt: Date;
 }
 
 export const ExhibitionSchema = SchemaFactory.createForClass(Exhibition);
