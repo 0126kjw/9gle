@@ -21,10 +21,7 @@ export class ExhibitionController {
   async getExhibition(
     @Param() getExhibitionDto: GetExhibitionDto,
   ): Promise<Exhibition> {
-    const exhibition = await this.exhibitionService.findById(
-      getExhibitionDto.id,
-    );
-    return exhibition;
+    return this.exhibitionService.findById(getExhibitionDto.id);
   }
 
   /**

@@ -15,8 +15,7 @@ export class ExhibitionScheduler {
   @Cron('59 59 23 * * *')
   async handleCron(): Promise<void> {
     const list = await crawlExhibitions();
-    const exhibitionCreated = await this.exhibitionModel.create(list);
 
-    if (!exhibitionCreated) throw new Error('크롤링 업데이트 실패');
+    this.exhibitionModel.create(list);
   }
 }

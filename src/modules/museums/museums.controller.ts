@@ -19,8 +19,7 @@ export class MuseumController {
   @ApiNotFoundResponse({ description: 'NotFound' })
   @Get('/:id')
   async getMuseum(@Param() getMuseumDto: GetMuseumDto): Promise<Museum> {
-    const museum = await this.museumService.findById(getMuseumDto.id);
-    return museum;
+    return this.museumService.findById(getMuseumDto.id);
   }
 
   /**
