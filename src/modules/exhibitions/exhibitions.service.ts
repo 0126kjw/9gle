@@ -35,15 +35,11 @@ export class ExhibitionService {
 
   async pagination(page: number): Promise<Exhibition[]> {
     const perPage = 9;
-    // const total = await this.exhibitionModel.countDocuments({});
-    return (
-      this.exhibitionModel
-        .find()
-        // .sort({ createdAt: 1 })
-        .skip(perPage * (page - 1))
-        .limit(perPage)
-        .lean()
-    );
+    return this.exhibitionModel
+      .find()
+      .skip(perPage * (page - 1))
+      .limit(perPage)
+      .lean();
   }
 
   async searchExhibition(keyword: string): Promise<Exhibition[]> {
