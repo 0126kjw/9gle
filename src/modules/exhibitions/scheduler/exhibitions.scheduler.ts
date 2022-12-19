@@ -12,7 +12,7 @@ export class ExhibitionScheduler {
     private readonly exhibitionModel: Model<Exhibition>,
   ) {}
 
-  @Cron('59 59 23 * * *')
+  // @Cron('59 59 23 * * *')  // cron 중지
   async handleCron(): Promise<void> {
     const list = await crawlExhibitions();
 
